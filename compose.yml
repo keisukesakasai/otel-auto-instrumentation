@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  app:
+    image: otel-auto-instrumentation-app:latest
+    ports:
+      - 8081:80
+    environment:
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://jaeger:4318
+      
+  jaeger:
+    image: jaegertracing/all-in-one
+    ports:
+      - 4317:4317
+      - 4318:4318
+      - 14268:14268
+      - 16686:16686
+    environment:
+      OTEL_EXPORTER_OTLP_ENDPOINT: true
